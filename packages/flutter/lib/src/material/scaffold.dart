@@ -286,9 +286,9 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
   ///
   ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(SnackBar snackBar) {
     assert(
-      _scaffolds.isNotEmpty,
-      'ScaffoldMessenger.showSnackBar was called, but there are currently no '
-      'descendant Scaffolds to present to.',
+    _scaffolds.isNotEmpty,
+    'ScaffoldMessenger.showSnackBar was called, but there are currently no '
+        'descendant Scaffolds to present to.',
     );
     _snackBarController ??= SnackBar.createAnimationController(vsync: this)
       ..addStatusListener(_handleSnackBarStatusChanged);
@@ -303,10 +303,10 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
       // from one to the next.
       snackBar.withAnimation(_snackBarController!, fallbackKey: UniqueKey()),
       Completer<SnackBarClosedReason>(),
-        () {
-          assert(_snackBars.first == controller);
-          hideCurrentSnackBar();
-        },
+          () {
+        assert(_snackBars.first == controller);
+        hideCurrentSnackBar();
+      },
       null, // SnackBar doesn't use a builder function so setState() wouldn't rebuild it
     );
     try {
@@ -323,16 +323,16 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
               ErrorSummary('The showSnackBar() method cannot be called during build.'),
               ErrorDescription(
                 'The showSnackBar() method was called during build, which is '
-                'prohibited as showing snack bars requires updating state. Updating '
-                'state is not possible during build.',
+                    'prohibited as showing snack bars requires updating state. Updating '
+                    'state is not possible during build.',
               ),
               ErrorHint(
                 'Instead of calling showSnackBar() during build, call it directly '
-                'in your on tap (and related) callbacks. If you need to immediately '
-                'show a snack bar, make the call in initState() or '
-                'didChangeDependencies() instead. Otherwise, you can also schedule a '
-                'post-frame callback using SchedulerBinding.addPostFrameCallback to '
-                'show the snack bar after the current frame.',
+                    'in your on tap (and related) callbacks. If you need to immediately '
+                    'show a snack bar, make the call in initState() or '
+                    'didChangeDependencies() instead. Otherwise, you can also schedule a '
+                    'post-frame callback using SchedulerBinding.addPostFrameCallback to '
+                    'show the snack bar after the current frame.',
               ),
               context.describeOwnershipChain(
                 'The ownership chain for the particular ScaffoldMessenger is',
@@ -454,9 +454,9 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
   /// {@end-tool}
   ScaffoldFeatureController<MaterialBanner, MaterialBannerClosedReason> showMaterialBanner(MaterialBanner materialBanner) {
     assert(
-      _scaffolds.isNotEmpty,
-      'ScaffoldMessenger.showMaterialBanner was called, but there are currently no '
-      'descendant Scaffolds to present to.',
+    _scaffolds.isNotEmpty,
+    'ScaffoldMessenger.showMaterialBanner was called, but there are currently no '
+        'descendant Scaffolds to present to.',
     );
     _materialBannerController ??= MaterialBanner.createAnimationController(vsync: this)
       ..addStatusListener(_handleMaterialBannerStatusChanged);
@@ -567,7 +567,7 @@ class ScaffoldMessengerState extends State<ScaffoldMessenger> with TickerProvide
           final SnackBar snackBar = _snackBars.first._widget;
           _snackBarTimer = Timer(snackBar.duration, () {
             assert(
-              _snackBarController!.status == AnimationStatus.forward ||
+            _snackBarController!.status == AnimationStatus.forward ||
                 _snackBarController!.status == AnimationStatus.completed,
             );
             // Look up MediaQuery again in case the setting changed.
@@ -829,9 +829,9 @@ class _ScaffoldGeometryNotifier extends ChangeNotifier implements ValueListenabl
       final RenderObject? renderObject = context.findRenderObject();
       if (renderObject == null || !renderObject.owner!.debugDoingPaint) {
         throw FlutterError(
-            'Scaffold.geometryOf() must only be accessed during the paint phase.\n'
-            'The ScaffoldGeometry is only available during the paint phase, because '
-            'its value is computed during the animation and layout phases prior to painting.',
+          'Scaffold.geometryOf() must only be accessed during the paint phase.\n'
+              'The ScaffoldGeometry is only available during the paint phase, because '
+              'its value is computed during the animation and layout phases prior to painting.',
         );
       }
       return true;
@@ -870,8 +870,8 @@ class _BodyBoxConstraints extends BoxConstraints {
     required this.appBarHeight,
     required this.materialBannerHeight,
   }) : assert(bottomWidgetsHeight >= 0),
-       assert(appBarHeight >= 0),
-       assert(materialBannerHeight >= 0);
+        assert(appBarHeight >= 0),
+        assert(materialBannerHeight >= 0);
 
   final double bottomWidgetsHeight;
   final double appBarHeight;
@@ -925,13 +925,13 @@ class _BodyBuilder extends StatelessWidget {
         final MediaQueryData metrics = MediaQuery.of(context);
 
         final double bottom = extendBody
-          ? math.max(metrics.padding.bottom, bodyConstraints.bottomWidgetsHeight)
-          : metrics.padding.bottom;
+            ? math.max(metrics.padding.bottom, bodyConstraints.bottomWidgetsHeight)
+            : metrics.padding.bottom;
 
         final double top = extendBodyBehindAppBar
-          ? math.max(metrics.padding.top,
-              bodyConstraints.appBarHeight + bodyConstraints.materialBannerHeight)
-          : metrics.padding.top;
+            ? math.max(metrics.padding.top,
+            bodyConstraints.appBarHeight + bodyConstraints.materialBannerHeight)
+            : metrics.padding.top;
 
         return MediaQuery(
           data: metrics.copyWith(
@@ -1146,8 +1146,8 @@ class _ScaffoldLayout extends MultiChildLayoutDelegate {
         // floating.
         final double safeYOffsetBase = size.height - minViewPadding.bottom;
         snackBarYOffsetBase = isSnackBarFloating
-          ? math.min(contentBottom, safeYOffsetBase)
-          : contentBottom;
+            ? math.min(contentBottom, safeYOffsetBase)
+            : contentBottom;
       }
 
       final double xOffset = hasCustomWidth ? (size.width - snackBarWidth!) / 2 : 0.0;
@@ -1165,10 +1165,10 @@ class _ScaffoldLayout extends MultiChildLayoutDelegate {
             throw FlutterError.fromParts(<DiagnosticsNode>[
               ErrorSummary('Floating SnackBar presented off screen.'),
               ErrorDescription(
-                'A SnackBar with behavior property set to SnackBarBehavior.floating is fully '
-                'or partially off screen because some or all the widgets provided to '
-                'Scaffold.floatingActionButton, Scaffold.persistentFooterButtons and '
-                'Scaffold.bottomNavigationBar take up too much vertical space.\n'
+                  'A SnackBar with behavior property set to SnackBarBehavior.floating is fully '
+                      'or partially off screen because some or all the widgets provided to '
+                      'Scaffold.floatingActionButton, Scaffold.persistentFooterButtons and '
+                      'Scaffold.bottomNavigationBar take up too much vertical space.\n'
               ),
               ErrorHint(
                 'Consider constraining the size of these widgets to allow room for the SnackBar to be visible.',
@@ -1204,13 +1204,13 @@ class _ScaffoldLayout extends MultiChildLayoutDelegate {
   @override
   bool shouldRelayout(_ScaffoldLayout oldDelegate) {
     return oldDelegate.minInsets != minInsets
-      || oldDelegate.minViewPadding != minViewPadding
-      || oldDelegate.textDirection != textDirection
-      || oldDelegate.floatingActionButtonMoveAnimationProgress != floatingActionButtonMoveAnimationProgress
-      || oldDelegate.previousFloatingActionButtonLocation != previousFloatingActionButtonLocation
-      || oldDelegate.currentFloatingActionButtonLocation != currentFloatingActionButtonLocation
-      || oldDelegate.extendBody != extendBody
-      || oldDelegate.extendBodyBehindAppBar != extendBodyBehindAppBar;
+        || oldDelegate.minViewPadding != minViewPadding
+        || oldDelegate.textDirection != textDirection
+        || oldDelegate.floatingActionButtonMoveAnimationProgress != floatingActionButtonMoveAnimationProgress
+        || oldDelegate.previousFloatingActionButtonLocation != previousFloatingActionButtonLocation
+        || oldDelegate.currentFloatingActionButtonLocation != currentFloatingActionButtonLocation
+        || oldDelegate.extendBody != extendBody
+        || oldDelegate.extendBodyBehindAppBar != extendBodyBehindAppBar;
   }
 }
 
@@ -1881,23 +1881,23 @@ class Scaffold extends StatefulWidget {
       ),
       ErrorDescription(
         'No Scaffold ancestor could be found starting from the context that was passed to Scaffold.of(). '
-        'This usually happens when the context provided is from the same StatefulWidget as that '
-        'whose build function actually creates the Scaffold widget being sought.',
+            'This usually happens when the context provided is from the same StatefulWidget as that '
+            'whose build function actually creates the Scaffold widget being sought.',
       ),
       ErrorHint(
         'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
-        'context that is "under" the Scaffold. For an example of this, please see the '
-        'documentation for Scaffold.of():\n'
-        '  https://api.flutter.dev/flutter/material/Scaffold/of.html',
+            'context that is "under" the Scaffold. For an example of this, please see the '
+            'documentation for Scaffold.of():\n'
+            '  https://api.flutter.dev/flutter/material/Scaffold/of.html',
       ),
       ErrorHint(
         'A more efficient solution is to split your build function into several widgets. This '
-        'introduces a new context from which you can obtain the Scaffold. In this solution, '
-        'you would have an outer widget that creates the Scaffold populated by instances of '
-        'your new inner widgets, and then in these inner widgets you would use Scaffold.of().\n'
-        'A less elegant but more expedient solution is assign a GlobalKey to the Scaffold, '
-        'then use the key.currentState property to obtain the ScaffoldState rather than '
-        'using the Scaffold.of() function.',
+            'introduces a new context from which you can obtain the Scaffold. In this solution, '
+            'you would have an outer widget that creates the Scaffold populated by instances of '
+            'your new inner widgets, and then in these inner widgets you would use Scaffold.of().\n'
+            'A less elegant but more expedient solution is assign a GlobalKey to the Scaffold, '
+            'then use the key.currentState property to obtain the ScaffoldState rather than '
+            'using the Scaffold.of() function.',
       ),
       context.describeElement('The context used was'),
     ]);
@@ -1949,19 +1949,19 @@ class Scaffold extends StatefulWidget {
         ),
         ErrorDescription(
           'This usually happens when the context provided is from the same StatefulWidget as that '
-          'whose build function actually creates the Scaffold widget being sought.',
+              'whose build function actually creates the Scaffold widget being sought.',
         ),
         ErrorHint(
           'There are several ways to avoid this problem. The simplest is to use a Builder to get a '
-          'context that is "under" the Scaffold. For an example of this, please see the '
-          'documentation for Scaffold.of():\n'
-          '  https://api.flutter.dev/flutter/material/Scaffold/of.html',
+              'context that is "under" the Scaffold. For an example of this, please see the '
+              'documentation for Scaffold.of():\n'
+              '  https://api.flutter.dev/flutter/material/Scaffold/of.html',
         ),
         ErrorHint(
           'A more efficient solution is to split your build function into several widgets. This '
-          'introduces a new context from which you can obtain the Scaffold. In this solution, '
-          'you would have an outer widget that creates the Scaffold populated by instances of '
-          'your new inner widgets, and then in these inner widgets you would use Scaffold.geometryOf().',
+              'introduces a new context from which you can obtain the Scaffold. In this solution, '
+              'you would have an outer widget that creates the Scaffold populated by instances of '
+              'your new inner widgets, and then in these inner widgets you would use Scaffold.geometryOf().',
         ),
         context.describeElement('The context used was'),
       ]);
@@ -2193,7 +2193,7 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
       }
 
       _currentBottomSheet = _buildBottomSheet<void>(
-        (BuildContext context) {
+            (BuildContext context) {
           return NotificationListener<DraggableScrollableNotification>(
             onNotification: persistentBottomSheetExtentChanged,
             child: DraggableScrollableActuator(
@@ -2230,9 +2230,9 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
   ///
   /// See [Scaffold.of] for information about how to obtain the [ScaffoldState].
   void closeDrawer() {
-   if (hasDrawer && isDrawerOpen) {
-     _drawerKey.currentState!.close();
-   }
+    if (hasDrawer && isDrawerOpen) {
+      _drawerKey.currentState!.close();
+    }
   }
 
   /// Closes [Scaffold.endDrawer] if it is currently opened.
@@ -2249,23 +2249,23 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
   }
 
   PersistentBottomSheetController<T> _buildBottomSheet<T>(
-    WidgetBuilder builder, {
-    required bool isPersistent,
-    required AnimationController animationController,
-    Color? backgroundColor,
-    double? elevation,
-    ShapeBorder? shape,
-    Clip? clipBehavior,
-    BoxConstraints? constraints,
-    bool? enableDrag,
-    bool shouldDisposeAnimationController = true,
-  }) {
+      WidgetBuilder builder, {
+        required bool isPersistent,
+        required AnimationController animationController,
+        Color? backgroundColor,
+        double? elevation,
+        ShapeBorder? shape,
+        Clip? clipBehavior,
+        BoxConstraints? constraints,
+        bool? enableDrag,
+        bool shouldDisposeAnimationController = true,
+      }) {
     assert(() {
       if (widget.bottomSheet != null && isPersistent && _currentBottomSheet != null) {
         throw FlutterError(
           'Scaffold.bottomSheet cannot be specified while a bottom sheet '
-          'displayed with showBottomSheet() is still visible.\n'
-          'Rebuild the Scaffold with a null bottomSheet before calling showBottomSheet().',
+              'displayed with showBottomSheet() is still visible.\n'
+              'Rebuild the Scaffold with a null bottomSheet before calling showBottomSheet().',
         );
       }
       return true;
@@ -2311,12 +2311,12 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
     }
 
     final LocalHistoryEntry? entry = isPersistent
-      ? null
-      : LocalHistoryEntry(onRemove: () {
-          if (!removedEntry && _currentBottomSheet?._widget == bottomSheet && !doingDispose) {
-            removeCurrentBottomSheet();
-          }
-        });
+        ? null
+        : LocalHistoryEntry(onRemove: () {
+      if (!removedEntry && _currentBottomSheet?._widget == bottomSheet && !doingDispose) {
+        removeCurrentBottomSheet();
+      }
+    });
 
     void removeEntryIfNeeded() {
       if (!isPersistent && !removedEntry) {
@@ -2368,9 +2368,9 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
       bottomSheet,
       completer,
       entry != null
-        ? entry.remove
-        : removeCurrentBottomSheet,
-      (VoidCallback fn) { bottomSheetKey.currentState?.setState(fn); },
+          ? entry.remove
+          : removeCurrentBottomSheet,
+          (VoidCallback fn) { bottomSheetKey.currentState?.setState(fn); },
       !isPersistent,
     );
   }
@@ -2424,21 +2424,21 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
   ///  * The Material 2 spec at <https://m2.material.io/components/sheets-bottom>.
   ///  * The Material 3 spec at <https://m3.material.io/components/bottom-sheets/overview>.
   PersistentBottomSheetController<T> showBottomSheet<T>(
-    WidgetBuilder builder, {
-    Color? backgroundColor,
-    double? elevation,
-    ShapeBorder? shape,
-    Clip? clipBehavior,
-    BoxConstraints? constraints,
-    bool? enableDrag,
-    AnimationController? transitionAnimationController,
-  }) {
+      WidgetBuilder builder, {
+        Color? backgroundColor,
+        double? elevation,
+        ShapeBorder? shape,
+        Clip? clipBehavior,
+        BoxConstraints? constraints,
+        bool? enableDrag,
+        AnimationController? transitionAnimationController,
+      }) {
     assert(() {
       if (widget.bottomSheet != null) {
         throw FlutterError(
           'Scaffold.bottomSheet cannot be specified while a bottom sheet '
-          'displayed with showBottomSheet() is still visible.\n'
-          'Rebuild the Scaffold with a null bottomSheet before calling showBottomSheet().',
+              'displayed with showBottomSheet() is still visible.\n'
+              'Rebuild the Scaffold with a null bottomSheet before calling showBottomSheet().',
         );
       }
       return true;
@@ -2570,12 +2570,12 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
           throw FlutterError.fromParts(<DiagnosticsNode>[
             ErrorSummary(
               'Scaffold.bottomSheet cannot be specified while a bottom sheet displayed '
-              'with showBottomSheet() is still visible.',
+                  'with showBottomSheet() is still visible.',
             ),
             ErrorHint(
               'Use the PersistentBottomSheetController '
-              'returned by showBottomSheet() to close the old bottom sheet before creating '
-              'a Scaffold with a (non null) bottomSheet.',
+                  'returned by showBottomSheet() to close the old bottom sheet before creating '
+                  'a Scaffold with a (non null) bottomSheet.',
             ),
           ]);
         }
@@ -2598,7 +2598,7 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
     final ScaffoldMessengerState? currentScaffoldMessenger = ScaffoldMessenger.maybeOf(context);
     // If our ScaffoldMessenger has changed, unregister with the old one first.
     if (_scaffoldMessenger != null &&
-      (currentScaffoldMessenger == null || _scaffoldMessenger != currentScaffoldMessenger)) {
+        (currentScaffoldMessenger == null || _scaffoldMessenger != currentScaffoldMessenger)) {
       _scaffoldMessenger?._unregister(this);
     }
     // Register with the current ScaffoldMessenger, if there is one.
@@ -2621,16 +2621,16 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
   }
 
   void _addIfNonNull(
-    List<LayoutId> children,
-    Widget? child,
-    Object childId, {
-    required bool removeLeftPadding,
-    required bool removeTopPadding,
-    required bool removeRightPadding,
-    required bool removeBottomPadding,
-    bool removeBottomInset = false,
-    bool maintainBottomViewPadding = false,
-  }) {
+      List<LayoutId> children,
+      Widget? child,
+      Object childId, {
+        required bool removeLeftPadding,
+        required bool removeTopPadding,
+        required bool removeRightPadding,
+        required bool removeBottomPadding,
+        bool removeBottomInset = false,
+        bool maintainBottomViewPadding = false,
+      }) {
     MediaQueryData data = MediaQuery.of(context).removePadding(
       removeLeft: removeLeftPadding,
       removeTop: removeTopPadding,
@@ -2808,8 +2808,8 @@ class ScaffoldState extends State<Scaffold> with TickerProviderStateMixin, Resto
     // SnackBar set by ScaffoldMessenger
     if (_messengerSnackBar != null) {
       final SnackBarBehavior snackBarBehavior = _messengerSnackBar?._widget.behavior
-        ?? themeData.snackBarTheme.behavior
-        ?? SnackBarBehavior.fixed;
+          ?? themeData.snackBarTheme.behavior
+          ?? SnackBarBehavior.fixed;
       isSnackBarFloating = snackBarBehavior == SnackBarBehavior.floating;
       snackBarWidth = _messengerSnackBar?._widget.width ?? themeData.snackBarTheme.width;
 
@@ -3123,7 +3123,7 @@ class _StandardBottomSheetState extends State<_StandardBottomSheet> {
   void initState() {
     super.initState();
     assert(
-      widget.animationController.status == AnimationStatus.forward
+    widget.animationController.status == AnimationStatus.forward
         || widget.animationController.status == AnimationStatus.completed,
     );
     widget.animationController.addStatusListener(_handleStatusChange);
@@ -3230,12 +3230,12 @@ class _StandardBottomSheetState extends State<_StandardBottomSheet> {
 /// [Scaffold.bottomSheet].
 class PersistentBottomSheetController<T> extends ScaffoldFeatureController<_StandardBottomSheet, T> {
   const PersistentBottomSheetController._(
-    super.widget,
-    super.completer,
-    super.close,
-    StateSetter super.setState,
-    this._isLocalHistoryEntry,
-  ) : super._();
+      super.widget,
+      super.completer,
+      super.close,
+      StateSetter super.setState,
+      this._isLocalHistoryEntry,
+      ) : super._();
 
   final bool _isLocalHistoryEntry;
 }
